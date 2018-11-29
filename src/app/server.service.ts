@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 
 @Injectable()
 export class ServerService {
@@ -9,7 +9,8 @@ export class ServerService {
     constructor(private http: Http) {}
 
     addServers(servers: any[]) {
-        return this.http.post(this.fireBaseUrl, servers);
+        const myHeaders = new Headers({'Content-Type': 'application/json'});
+        return this.http.post(this.fireBaseUrl, servers, {headers: myHeaders});
     }
 
 }
