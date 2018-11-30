@@ -23,7 +23,7 @@ export class AppComponent {
   }
 
   onSaveServers() {
-    this.serverService.addServers(this.servers)
+    this.serverService.putServers(this.servers)
       .subscribe(
         (response) => console.log(response),
         (error) => console.log(error)

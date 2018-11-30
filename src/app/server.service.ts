@@ -17,4 +17,9 @@ export class ServerService {
         return this.http.get(this.fireBaseUrl);
     }
 
+    putServers(servers: any[]) {
+        const myHeaders = new Headers({'Content-Type': 'application/json'});
+        return this.http.put(this.fireBaseUrl, servers, {headers: myHeaders});
+    }
+
 }
