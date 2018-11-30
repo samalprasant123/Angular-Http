@@ -13,4 +13,8 @@ export class ServerService {
         return this.http.post(this.fireBaseUrl, servers, {headers: myHeaders});
     }
 
+    getServers() {
+        return this.http.get(this.fireBaseUrl);
+    }
+
 }
