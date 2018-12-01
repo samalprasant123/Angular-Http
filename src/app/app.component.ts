@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 
 import { ServerService } from './server.service';
@@ -8,13 +8,19 @@ import { ServerService } from './server.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  appName;
+
   servers = [
     { name: 'Testserver', capacity: 10, id: this.generateId() },
     { name: 'Liveserver', capacity: 100, id: this.generateId() }
   ];
 
   constructor(private serverService: ServerService) { }
+
+  ngOnInit() {
+    this.appName = this.serverService.getAppName();
+  }
 
   onAddServer(name: string) {
     this.servers.push({

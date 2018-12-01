@@ -16,7 +16,7 @@ export class ServerService {
     }
 
     getServers() {
-        return this.http.get('https://angular-http-dd05c.firebaseio.com/data')
+        return this.http.get(this.fireBaseUrl)
             .pipe(map(
                 (response: Response) => {
                     const data = response.json();
@@ -34,6 +34,15 @@ export class ServerService {
     putServers(servers: any[]) {
         const myHeaders = new Headers({'Content-Type': 'application/json'});
         return this.http.put(this.fireBaseUrl, servers, {headers: myHeaders});
+    }
+
+    getAppName() {
+        return this.http.get('https://angular-http-dd05c.firebaseio.com/data/appName.json')
+            .pipe(map(
+                (response: Response) => {
+                    return response.json();
+                }
+            ));
     }
 
 }
