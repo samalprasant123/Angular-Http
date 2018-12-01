@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Injectable()
 export class ServerService {
@@ -15,11 +16,17 @@ export class ServerService {
     }
 
     getServers() {
-        return this.http.get(this.fireBaseUrl)
+        return this.http.get('https://angular-http-dd05c.firebaseio.com/data')
             .pipe(map(
                 (response: Response) => {
                     const data = response.json();
                     return data;
+                }
+            ))
+            .pipe(catchError(
+                (error: Response) => {
+                    // return throwError(error);
+                    return throwError('Error getting response');
                 }
             ));
     }
